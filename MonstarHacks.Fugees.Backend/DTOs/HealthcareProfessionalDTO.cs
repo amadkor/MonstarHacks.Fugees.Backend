@@ -2,7 +2,7 @@
 
 namespace MonstarHacks.Fugees.Backend.DTOs
 {
-    public class HCPDTO
+    public class HealthcareProfessionalDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

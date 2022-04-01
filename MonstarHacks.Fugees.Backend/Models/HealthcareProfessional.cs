@@ -12,9 +12,9 @@ namespace MonstarHacks.Fugees.Backend.Models
 
         public Point? LastKnownLocation { get; set; }
 
-        public virtual HCPDTO toDTO()
+        public virtual HealthcareProfessionalDTO toDTO()
         {
-            return new HCPDTO() { 
+            return new HealthcareProfessionalDTO() { 
                 Id = Id, 
                 Name = Name, 
                 Speciality = Speciality,

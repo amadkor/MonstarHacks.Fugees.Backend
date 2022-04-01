@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MonstarHacks.Fugees.Backend;
+using MonstarHacks.Fugees.Backend.DTOs;
 using MonstarHacks.Fugees.Backend.Models;
 using NetTopologySuite.Geometries;
 
@@ -66,7 +67,7 @@ app.MapGet("/HCP", ([FromServices] FugeesDbContext fugeesDbContext) =>
     return fugeesDbContext.HealthcareProfessionals.Select(x=>x.toDTO());
 });
 
-app.MapGet("HCP/{specialty}", (int? specialtyId, int? distance, double? latitude, double? longitude, [FromServices] FugeesDbContext fugeesDbContext) =>
+app.MapGet("/HCP/{specialty}", (int? specialtyId, int? distance, double? latitude, double? longitude, [FromServices] FugeesDbContext fugeesDbContext) =>
 {
 
     var result = fugeesDbContext.HealthcareProfessionals.AsQueryable();
@@ -81,7 +82,16 @@ app.MapGet("HCP/{specialty}", (int? specialtyId, int? distance, double? latitude
     return result.Include(hcp=>hcp.Speciality).Select(x=>x.toDTO());
 });
 
-//app.MapPost("HCP", HealthcareProfessional healthcareProfessional, [FromForm] FileModel)
+//app.MapPost("/HCP", (HealthcareProfessionalDTO healthcareProfessional, HttpRequest request) =>
+//{
+//    return;
+//});
+
+//app.MapPost("/UploadHCPFile/{id}", (int id, IFormFile file) =>
+//{
+//    return;
+//})
+//    .Accepts<IFormFile>("multipart/form-data");
 
 
 
