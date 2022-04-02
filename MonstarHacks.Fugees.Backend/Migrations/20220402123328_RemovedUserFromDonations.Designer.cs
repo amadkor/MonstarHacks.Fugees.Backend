@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonstarHacks.Fugees.Backend;
 using NetTopologySuite.Geometries;
@@ -11,9 +12,10 @@ using NetTopologySuite.Geometries;
 namespace MonstarHacks.Fugees.Backend.Migrations
 {
     [DbContext(typeof(FugeesDbContext))]
-    partial class FugeesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220402123328_RemovedUserFromDonations")]
+    partial class RemovedUserFromDonations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +50,7 @@ namespace MonstarHacks.Fugees.Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("HealthcareProfessionals", (string)null);
+                    b.ToTable("HealthcareProfessionals");
                 });
 
             modelBuilder.Entity("MonstarHacks.Fugees.Backend.Models.HealthcareProfessionalSpecialtyType", b =>
@@ -65,7 +67,7 @@ namespace MonstarHacks.Fugees.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HealthcareProfessionalSpecialtyTypes", (string)null);
+                    b.ToTable("HealthcareProfessionalSpecialtyTypes");
                 });
 
             modelBuilder.Entity("MonstarHacks.Fugees.Backend.Models.MedicalSupply", b =>
@@ -82,7 +84,7 @@ namespace MonstarHacks.Fugees.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MedicalSupplies", (string)null);
+                    b.ToTable("MedicalSupplies");
                 });
 
             modelBuilder.Entity("MonstarHacks.Fugees.Backend.Models.MedicalSupplyDonation", b =>
@@ -106,7 +108,7 @@ namespace MonstarHacks.Fugees.Backend.Migrations
 
                     b.HasIndex("MedicalSuppliesId");
 
-                    b.ToTable("MedicalSupplyDonations", (string)null);
+                    b.ToTable("MedicalSupplyDonations");
                 });
 
             modelBuilder.Entity("MonstarHacks.Fugees.Backend.Models.User", b =>
@@ -134,7 +136,7 @@ namespace MonstarHacks.Fugees.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("MonstarHacks.Fugees.Backend.Models.HealthcareProfessional", b =>

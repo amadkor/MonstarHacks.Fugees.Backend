@@ -90,24 +90,7 @@ app.UseAuthorization();
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-       new WeatherForecast
-       (
-           DateTime.Now.AddDays(index),
-           Random.Shared.Next(-20, 55),
-           summaries[Random.Shared.Next(summaries.Length)]
-       ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
 
 
 #region HCPs
@@ -218,6 +201,38 @@ app.MapGet("/Specialties", ([FromServices] FugeesDbContext fugeesDbContext) =>
 //    return;
 //})
 //    .Accepts<IFormFile>("multipart/form-data");
+
+
+
+#endregion
+
+#region Medical Supplies
+
+app.MapGet("/MedicalSupplies", ([FromServices] FugeesDbContext fugeesDbContext) =>
+{
+    return fugeesDbContext.MedicalSupplies;
+});
+
+app.MapGet("/MedicalSupplyDonations", ([FromServices] FugeesDbContext fugeesDbContext) =>
+{
+    return fugeesDbContext.MedicalSupplyDonations.Include(d=>d.MedicalSupplies);
+});
+app.MapGet("/MedicalSupplyDonations/ByMedicalSupply/{id}", ([FromServices] FugeesDbContext fugeesDbContext, int id) =>
+{
+    return fugeesDbContext.MedicalSupplyDonations.Include(d => d.MedicalSupplies).Where(d=>d.MedicalSuppliesId==id);
+});
+
+app.MapGet("/MedicalSupplyDonations/{id}", ([FromServices] FugeesDbContext fugeesDbContext, int id) =>
+{
+    return fugeesDbContext.MedicalSupplyDonations.Include(d => d.MedicalSupplies).FirstOrDefault(d=>d.Id==id);
+});
+
+app.MapPost("/MedicalSupplyDonations", async ([FromServices] FugeesDbContext fugeesDbContext, MedicalSupplyDonation medicalSupplyDonation) =>
+{
+    fugeesDbContext.MedicalSupplyDonations.Add(medicalSupplyDonation);
+    await fugeesDbContext.SaveChangesAsync();
+    return Results.Created("/MedicalSupplyDonations/" + medicalSupplyDonation.Id, medicalSupplyDonation);
+});
 
 
 

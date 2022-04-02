@@ -104,7 +104,64 @@ namespace MonstarHacks.Fugees.Backend.Models
                 var MedicalSupply1 = new MedicalSupply();
             }
 
+            if(seed && !fugeesDContext.MedicalSupplies.Any())
+            {
+                var medicalSupply1 = new MedicalSupply()
+                {
+                    Name = "Panadol"
+                };
+                var medicalSupply2 = new MedicalSupply()
+                {
+                    Name = "Band-aid"
+                };
 
+                var medicalSupplies = new List<MedicalSupply>() { medicalSupply1, medicalSupply2 };
+                fugeesDContext.MedicalSupplies.AddRange(medicalSupplies); ;
+
+                fugeesDContext.SaveChanges();
+
+                var medicalSupplyDonation1 = new MedicalSupplyDonation()
+                {
+                    isAvailable = true,
+                    MedicalSupplies = medicalSupply1,
+                    Quantity = 1
+                };
+                var medicalSupplyDonation2 = new MedicalSupplyDonation()
+                {
+                    isAvailable = true,
+                    MedicalSupplies = medicalSupply1,
+                    Quantity = 3
+                };
+                var medicalSupplyDonation3 = new MedicalSupplyDonation()
+                {
+                    isAvailable = true,
+                    MedicalSupplies = medicalSupply1,
+                    Quantity = 4
+                };
+
+                var medicalSupplyDonation4 = new MedicalSupplyDonation()
+                {
+                    isAvailable = true,
+                    MedicalSupplies = medicalSupply2,
+                    Quantity = 1
+                };
+                var medicalSupplyDonation5 = new MedicalSupplyDonation()
+                {
+                    isAvailable = true,
+                    MedicalSupplies = medicalSupply2,
+                    Quantity = 2
+                }; var medicalSupplyDonation6 = new MedicalSupplyDonation()
+                {
+                    isAvailable = true,
+                    MedicalSupplies = medicalSupply2,
+                    Quantity = 4
+                };
+
+                var donations = new List<MedicalSupplyDonation>() { medicalSupplyDonation1, medicalSupplyDonation2, medicalSupplyDonation3, medicalSupplyDonation4, medicalSupplyDonation5, medicalSupplyDonation6 };
+
+                fugeesDContext.MedicalSupplyDonations.AddRange(donations);
+                fugeesDContext.SaveChanges();
+            }
         }
     }
 }
