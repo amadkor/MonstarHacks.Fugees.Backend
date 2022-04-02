@@ -6,26 +6,24 @@ namespace MonstarHacks.Fugees.Backend.Models
     public class HealthcareProfessional
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public HealthcareProfessionalSpecialtyTypes Speciality { get; set; }
+        public User User { get; set; }
+        public HealthcareProfessionalSpecialtyType Speciality { get; set; }
         public bool isVerified { get; set; }
 
-        public Point? LastKnownLocation { get; set; }
 
         public virtual HealthcareProfessionalDTO toDTO()
         {
-            return new HealthcareProfessionalDTO() { 
-                Id = Id, 
-                Name = Name, 
+            return new HealthcareProfessionalDTO()
+            {
+                Id = Id,
+                User = User.toDTO(),
                 Speciality = Speciality,
-                isVerified = isVerified,
-                latitude = LastKnownLocation!=null?LastKnownLocation.Y:0,
-                longitude = LastKnownLocation!=null?LastKnownLocation.X:0
+                isVerified = isVerified
             };
         }
     }
 
-    public class HealthcareProfessionalSpecialtyTypes
+    public class HealthcareProfessionalSpecialtyType
     {
         public int Id { get;set; }
         public string SpecialityName { get; set; }

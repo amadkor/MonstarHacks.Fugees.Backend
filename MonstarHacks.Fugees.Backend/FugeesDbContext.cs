@@ -14,7 +14,10 @@ namespace MonstarHacks.Fugees.Backend
         }
 
         public DbSet<HealthcareProfessional> HealthcareProfessionals { get; set; }
-        public DbSet<HealthcareProfessionalSpecialtyTypes> HealthcareProfessionalSpecialtyTypes { get; set; }
+        public DbSet<HealthcareProfessionalSpecialtyType> HealthcareProfessionalSpecialtyTypes { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<MedicalSupply> MedicalSupplies { get; set; }
+        public DbSet<MedicalSupplyDonation> MedicalSupplyDonations { get; set; }
 
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
