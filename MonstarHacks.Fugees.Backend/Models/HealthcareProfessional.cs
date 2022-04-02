@@ -10,6 +10,8 @@ namespace MonstarHacks.Fugees.Backend.Models
         public HealthcareProfessionalSpecialtyType Speciality { get; set; }
         public bool isVerified { get; set; }
 
+        public string? CertificateURI { get; set; }
+
 
         public virtual HealthcareProfessionalDTO toDTO()
         {

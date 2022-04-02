@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonstarHacks.Fugees.Backend;
 using NetTopologySuite.Geometries;
@@ -11,9 +12,10 @@ using NetTopologySuite.Geometries;
 namespace MonstarHacks.Fugees.Backend.Migrations
 {
     [DbContext(typeof(FugeesDbContext))]
-    partial class FugeesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220402095022_addedHCPCertificateURI")]
+    partial class addedHCPCertificateURI
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

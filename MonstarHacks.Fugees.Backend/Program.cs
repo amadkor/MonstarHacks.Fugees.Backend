@@ -190,7 +190,15 @@ app.MapPost("/uploadHCPCertification",
         var blobClient = blobContainerClient.GetBlobClient(user.Id+" - HCPCertification.jpg");
 
         await using var stream = formFile.OpenReadStream();
+
+        var HCPProfile = fugeesDbContext.HealthcareProfessionals.FirstOrDefault(hcp => hcp.User.Id == user.Id);
+        if (HCPProfile is null)
+        {
+            return Results.BadRequest();
+        }
+        HCPProfile.CertificateURI = blobClient.Uri.ToString();
         var result = await blobClient.UploadAsync(stream,true);
+        await fugeesDbContext.SaveChangesAsync();
 
         return Results.Ok();
     }).Accepts<IFormFile>("multipart/form-data").RequireAuthorization();
