@@ -202,8 +202,11 @@ app.MapPost("/uploadHCPCertification",
 
         return Results.Ok();
     }).Accepts<IFormFile>("multipart/form-data").RequireAuthorization();
-;
 
+app.MapGet("/Specialties", ([FromServices] FugeesDbContext fugeesDbContext) =>
+{
+    return fugeesDbContext.HealthcareProfessionalSpecialtyTypes;
+});
 
 //app.MapPost("/HCP", (HealthcareProfessionalDTO healthcareProfessional, HttpRequest request) =>
 //{
