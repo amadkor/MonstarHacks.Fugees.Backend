@@ -8,5 +8,6 @@
         public int MedicalSuppliesId { get; set; }
         public int Quantity { get; set; }
         public bool isAvailable { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }
